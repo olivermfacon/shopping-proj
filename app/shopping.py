@@ -3,16 +3,53 @@ import datetime
 TAX_RATE = 0.0875
 
 def to_usd(price):
+    """
+    Converts a number into a formatted price with dollar sign, two decimal places, and thousand separators
+
+    Params:
+        price: the number to be formatted
+
+    Example:
+        to_usd(3.1)
+    """
     return "${0:,.2f}".format(price)
 
 def human_friendly_timestamp(current_datetime):
+    """
+    Converts a complicated datetime value into a more legible format 
+
+    Params:
+        current_datetime: the date and time to be formatted
+
+    Example:
+        human_friendly_timestamp(datetime.datetime.now())
+    """
     return str(current_datetime.strftime("%Y-%m-%d %H:%M:%S"))
 
 def find_product(products, product_id):
+    """
+    Finds a product in dictionary given a certain product ID
+
+    Params:
+        products: all products in dictionary
+        product_id: product ID of product to find in dictionary 
+
+    Example:
+        find_product(products, 3)
+    """
     matching_products = [product for product in products if str(product["id"]) == str(product_id)]
     return matching_products[0]
 
 def calculate_total_price(subtotal):
+    """
+    Calculates total price given a tax rate andf subtotal (tax rate is constant in this case)
+
+    Params:
+        subtotal: the subtotal of all orders before applying tax rate
+
+    Example:
+        calculate_total_price(21.99)
+    """
     tax_expense = subtotal * TAX_RATE
     return subtotal + tax_expense
 
