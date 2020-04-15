@@ -1,7 +1,6 @@
+import pytest
 import datetime
-from app.shopping import to_usd
-from app.shopping import human_friendly_timestamp
-from app.shopping import find_product
+from app.shopping import to_usd, human_friendly_timestamp, find_product, calculate_total_price
 
 def test_to_usd():
     result = to_usd(5)
@@ -25,3 +24,8 @@ def test_find_product():
     product_id = 2
     result = find_product(products, product_id)
     assert result == products[3]
+
+def test_calculate_total_price():
+    result = calculate_total_price(100)
+    assert result == 108.75
+

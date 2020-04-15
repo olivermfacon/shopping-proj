@@ -1,5 +1,7 @@
 import datetime 
 
+TAX_RATE = 0.0875
+
 def to_usd(price):
     return "${0:,.2f}".format(price)
 
@@ -9,6 +11,11 @@ def human_friendly_timestamp(current_datetime):
 def find_product(products, product_id):
     matching_products = [product for product in products if str(product["id"]) == str(product_id)]
     return matching_products[0]
+
+def calculate_total_price(subtotal):
+    tax_expense = subtotal * TAX_RATE
+    return subtotal + tax_expense
+
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per_pound": 0},
@@ -36,7 +43,6 @@ products = [
 product_id_list = []
 valid_ids = [str(p["id"]) for p in products]
 total_price = tax_expense = subtotal = 0
-tax_rate = 0.0875
 divider = "------------------------------"
 error_message = "Invalid entry. Please try again."
 store_name = "PYTHON GROCERIES"
@@ -73,9 +79,8 @@ if __name__ == "__main__":
     
 
     print(divider)
-
-    tax_expense = subtotal * tax_rate
-    total_price = subtotal + tax_expense
+    
+    total_price = calculate_total_price(subtotal)
 
     print("SUBTOTAL: " + to_usd(subtotal))
     print("Plus NYC Sales Tax (8.75%): " + to_usd(tax_expense))
