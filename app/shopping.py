@@ -6,6 +6,9 @@ def to_usd(price):
 def human_friendly_timestamp(current_datetime):
     return str(current_datetime.strftime("%Y-%m-%d %H:%M:%S"))
 
+def find_product(products, product_id):
+    matching_products = [product for product in products if str(product["id"]) == str(product_id)]
+    return matching_products[0]
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per_pound": 0},
@@ -63,11 +66,11 @@ if __name__ == "__main__":
     print("Shopping Cart Items: ")
 
     for product_id in product_id_list: 
-        matching_products = [product for product in products if str(product["id"]) == str(product_id)]
-        matching_product = matching_products[0]
+        matching_product = find_product(products, product_id)
         subtotal = subtotal + matching_product["price"]
         item_price = "(" + to_usd(matching_product["price"]) + ")"
         print(" + " + matching_product["name"] + " " + item_price)
+    
 
     print(divider)
 
