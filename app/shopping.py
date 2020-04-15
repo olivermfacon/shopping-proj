@@ -3,6 +3,10 @@ import datetime
 def to_usd(price):
     return "${0:,.2f}".format(price)
 
+def human_friendly_timestamp(current_datetime):
+    return str(current_datetime.strftime("%Y-%m-%d %H:%M:%S"))
+
+
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per_pound": 0},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99, "price_per_pound": 0},
@@ -54,7 +58,7 @@ if __name__ == "__main__":
     print(divider)
     print("Web: " + web_address)
     print("Phone: " + phone)
-    print("Checkout Time: " + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))) # https://stackoverflow.com/questions/7999935/python-datetime-to-string-without-microsecond-component
+    print("Checkout Time: " + human_friendly_timestamp(datetime.datetime.now())) # https://stackoverflow.com/questions/7999935/python-datetime-to-string-without-microsecond-component
     print(divider)
     print("Shopping Cart Items: ")
 
