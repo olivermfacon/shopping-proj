@@ -1,7 +1,7 @@
 import datetime 
 
 def to_usd(price):
-    return "${0:.2f}".format(price)
+    return "${0:,.2f}".format(price)
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per_pound": 0},
@@ -37,44 +37,45 @@ web_address = "www.pythongroceries.com"
 phone = "+1(202)763-2634"
 thank_you_note = "Thank you for choosing Python Groceries! Please come again soon."
 
-while True:
-    match = False
-    product_id = input("Please input a product identifier: ")  #entering product IDs
-    product_id = product_id.lower().title() 
-    if product_id == "Done": #break when done
-        break
-    elif product_id not in valid_ids: 
-        print(error_message)
-    else:
-        product_id_list.append(int(product_id))
-        
-print(divider)
-print(store_name)
-print(divider)
-print("Web: " + web_address)
-print("Phone: " + phone)
-print("Checkout Time: " + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))) # https://stackoverflow.com/questions/7999935/python-datetime-to-string-without-microsecond-component
-print(divider)
-print("Shopping Cart Items: ")
+if __name__ == "__main__":
+    while True:
+        match = False
+        product_id = input("Please input a product identifier: ")  #entering product IDs
+        product_id = product_id.lower().title() 
+        if product_id == "Done": #break when done
+            break
+        elif product_id not in valid_ids: 
+            print(error_message)
+        else:
+            product_id_list.append(int(product_id))
+            
+    print(divider)
+    print(store_name)
+    print(divider)
+    print("Web: " + web_address)
+    print("Phone: " + phone)
+    print("Checkout Time: " + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))) # https://stackoverflow.com/questions/7999935/python-datetime-to-string-without-microsecond-component
+    print(divider)
+    print("Shopping Cart Items: ")
 
-for product_id in product_id_list: 
-    matching_products = [product for product in products if str(product["id"]) == str(product_id)]
-    matching_product = matching_products[0]
-    subtotal = subtotal + matching_product["price"]
-    item_price = "(" + to_usd(matching_product["price"]) + ")"
-    print(" + " + matching_product["name"] + " " + item_price)
+    for product_id in product_id_list: 
+        matching_products = [product for product in products if str(product["id"]) == str(product_id)]
+        matching_product = matching_products[0]
+        subtotal = subtotal + matching_product["price"]
+        item_price = "(" + to_usd(matching_product["price"]) + ")"
+        print(" + " + matching_product["name"] + " " + item_price)
 
-print(divider)
+    print(divider)
 
-tax_expense = subtotal * tax_rate
-total_price = subtotal + tax_expense
+    tax_expense = subtotal * tax_rate
+    total_price = subtotal + tax_expense
 
-print("SUBTOTAL: " + to_usd(subtotal))
-print("Plus NYC Sales Tax (8.75%): " + to_usd(tax_expense))
-print("TOTAL PRICE: " + to_usd(total_price))
-print(divider)
-print(thank_you_note)
-print(divider)
+    print("SUBTOTAL: " + to_usd(subtotal))
+    print("Plus NYC Sales Tax (8.75%): " + to_usd(tax_expense))
+    print("TOTAL PRICE: " + to_usd(total_price))
+    print(divider)
+    print(thank_you_note)
+    print(divider)
 
 
 
